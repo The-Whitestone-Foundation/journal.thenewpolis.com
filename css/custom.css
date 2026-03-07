@@ -1,0 +1,337 @@
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+body, html {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1140px;
+    overflow-x: hidden; 
+}
+
+#main {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto; 
+    padding: 50px 30px;
+}
+
+#main * {
+    text-align: initial;
+    max-width: 1140px;
+}
+
+.archive {
+    padding: 30px;
+}
+
+.navbars-container {
+    height: 35vh;
+    margin: 0 auto;
+    max-width: 1140px;
+    background-image: 
+        linear-gradient(to right, rgba(26, 42, 108, 0.7), rgba(178, 31, 31, 0.7)),
+        url('/img/bg/future-1751262.svg');        
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top -280px;
+    color: white; 
+    padding: 30px 5%;
+    position: relative;    
+    transition: all 0.5s ease-in-out; 
+}
+
+.top-info {
+    text-align: right;
+    padding: 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white; 
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); 
+}
+
+.title-overlay {
+    background-color: rgba(149, 71, 28, 0.7);
+    padding: 40px 80px;
+    margin: 0 5%;
+}
+
+.journal-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    color: white;
+    margin: 0;
+    line-height: 1.4;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+}
+
+
+.title-overlay {
+    margin: 0 30px;
+}
+.top-info {
+    padding-right: 30px;
+}
+.nav-menu {
+    padding-right: 30px;
+    }
+.my-nav {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    justify-content: right;
+    display: flex;
+}
+
+.my-nav-item {
+    border: none !important;
+    box-shadow: none !important;
+    margin-right: 10px;      
+    margin-bottom: 20px;
+}
+
+.my-nav-item a {
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 10px
+}
+
+.my-nav-item a[aria-current="page"] {
+    font-weight: bold !important;
+    color: #e2e7ec !important;
+    border: none !important;
+}
+
+
+.footer-grid-container {
+    background-color: #333;
+    color: #fff;
+    padding: 0 30px 5px 30px;
+    border-top: 1px solid rgba(231, 226, 226, 0.4);
+}
+.mt-5 {margin-top: 20px;}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 30px;
+    text-align: left;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 8px;
+}
+
+.footer-col h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #555;
+    padding-bottom: 5px;
+}
+
+.footer-col p, .footer-col li {
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: #fff;
+}
+
+@media (min-width: 768px) {
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 40px;
+    }
+}
+
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #555;
+    font-size: 0.8em;
+    color: #ccc;
+}
+
+.none {text-decoration: none;}
+.text-white, a.text-white {color: white !important;}
+.bg-white {background-color: #e2e7ec color:#555;}
+
+#search .pagefind-ui__result {
+    background-color: #ffe0b2 !important; 
+    color: #333333 !important; 
+    border: 1px solid #ffcc80;
+    margin-bottom: 5px;
+}
+
+#search .pagefind-ui__result-excerpt {
+    color: #555555 !important;
+}
+
+#search .pagefind-ui__result-link {
+    color: #5d310b !important; 
+}
+
+.jt {
+    margin-bottom: -35px;
+}
+
+.dt {
+    list-style-type: none;
+    margin-bottom: 80px;   
+}
+
+.alert {
+    width: 100%;
+    max-width: 100%;
+    padding: 6px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: relative;
+    font-size: 1em;
+    font-family: inherit; 
+    line-height: 0.5em;
+    text-align: initial;
+}
+
+.alert-primary {
+    color: #fff;
+    background-color: rgba(26, 42, 108, 0.9); 
+    border-color: rgba(26, 42, 108, 1);
+}
+
+.alert-danger {
+    color: #fff;
+    background-color: rgba(178, 31, 31, 0.9); 
+    border-color: rgba(178, 31, 31, 1);
+}
+
+.alert-success {
+    color: #155724; 
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-warning {
+    color: #856404; 
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.alert .close {
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: inherit;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    opacity: 0.9;
+    margin-left: 15px;
+}
+
+.alert .close:hover {
+    opacity: 1;
+}
+
+.alert-primary .close,
+.alert-danger .close {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); 
+    color: white; 
+}
+
+.alert.hidden {
+    display: none;
+}
+
+@media (max-width: 400px) {
+    .navbars-container {
+    height: 430px;
+    margin: 0 auto;
+    max-width: 1140px;
+    background-image: 
+        linear-gradient(to right, rgba(26, 42, 108, 0.7), rgba(178, 31, 31, 0.7)),
+        url('/img/bg/future-1751262.svg');        
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top ;
+    color: white; 
+    padding: 30px 5%;
+    position: relative;    
+    transition: all 0.5s ease-in-out; 
+}
+
+    .my-nav {
+        justify-content: center;
+        text-align: center;
+        padding-top: 10px !important;
+    }
+    
+    .my-nav-item {
+        margin-right: 8px;
+        margin-left: 8px;
+        margin-bottom: 5px;
+    }
+    
+    .top-info {
+        text-align: left;
+        padding: 0 0 10px 0;
+    }
+
+    .title-overlay {
+        margin: 0;
+        padding: 15px;
+    }
+}
+    .tnp-header-top {
+        width: 100%;
+        color: #f9f9f9;
+    }
+
+    .tnp-meta-wrapper {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1140px; 
+        margin: 2px;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
+    .tnp-meta-item {
+        font-family: sans-serif;
+        font-weight: 700;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
