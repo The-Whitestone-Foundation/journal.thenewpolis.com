@@ -1,5 +1,4 @@
-[![Deploy Eleventy to XMIT](https://github.com/adamdjbrett/journal-newpolis/actions/workflows/deploy-xmit.yml/badge.svg)](https://github.com/adamdjbrett/journal-newpolis/actions/workflows/deploy-xmit.yml)
-[demo](https://tnpj.xmit.dev)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c5308d5c-0531-4d51-9f5b-81fd45f21dcd/deploy-status)](https://app.netlify.com/projects/newpolisjournal/deploys)
 
 # Todo list
 0. make layout match <thenewpolis.xmit.dev> with the exception of adding established date to top left corner and the ISSN to top right.
