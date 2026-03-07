@@ -32,10 +32,11 @@
 <meta content="{{ metadata.metasocial.twitter }}" name="twitter:site" />
 <meta property="og:type" content="website" />
 <meta content="index, follow" name="robots">
-<link rel="canonical" href="{{ metadata.url }}{{ page.url }}" />
+{% set siteUrl = metadata.url | htmlBaseUrl %}
+<link rel="canonical" href="{{ page.url | htmlBaseUrl(siteUrl) }}" />
 <link
 	rel="alternate"
-	href="feed/feed.xml"
+	href="{{ '/feed/feed.xml' | htmlBaseUrl(siteUrl) }}"
 	type="application/atom+xml"
 	title="{{ metadata.title }}"
 />
@@ -43,7 +44,7 @@
 <meta name="locale" content="{{ metadata.locale }}" />
 <meta property="og:locale" content="{{ metadata.locale }}" />
 <meta name="generator" content="{{ eleventy.generator }}" />
-<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
+<link rel="alternate" href="{{ '/feed/feed.xml' | htmlBaseUrl(siteUrl) }}" type="application/atom+xml" title="{{ metadata.title }}">
 <link rel="stylesheet" href="/css/bs.css">
 <link rel="stylesheet" href="/css/style.css">
 {% include "partials/schema.njk" %}

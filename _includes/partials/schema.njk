@@ -1,11 +1,12 @@
 <script type="application/ld+json" data-no-bundle>
+{% set siteUrl = metadata.url | htmlBaseUrl %}
 {
   "@context": "https://schema.org",
   "@type": "NGO",
-  "@id": "https://thewhitestonefoundation.org",
-  "name": "The Whitestone Foundation",
-  "url": "https://thewhitestonefoundation.org",
-  "logo": "https://thewhitestonefoundation.org/favicon.ico",
+  "@id": "{{ '/' | htmlBaseUrl(siteUrl) }}",
+  "name": "{{ metadata.title }}",
+  "url": "{{ '/' | htmlBaseUrl(siteUrl) }}",
+  "logo": "{{ metadata.favicon | htmlBaseUrl(siteUrl) }}",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Boulder",
@@ -32,12 +33,12 @@
     },
     "publisher": {
       "@type": "Organization",
-      "name": "The Whitestone Foundation",
-      "url": "https://thewhitestonefoundation.org"
+      "name": "{{ metadata.title }}",
+      "url": "{{ '/' | htmlBaseUrl(siteUrl) }}"
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "{{ metadata.url }}{{ page.url }}"
+      "@id": "{{ page.url | htmlBaseUrl(siteUrl) }}"
     }
   }
   </script>
@@ -53,13 +54,13 @@
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "{{ metadata.url }}"
+      "item": "{{ '/' | htmlBaseUrl(siteUrl) }}"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "{{ title or 'Article' }}",
-      "item": "{{ metadata.url }}{{ page.url }}"
+      "item": "{{ page.url | htmlBaseUrl(siteUrl) }}"
     }
   ]
 }

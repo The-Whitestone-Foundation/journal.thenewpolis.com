@@ -11,6 +11,10 @@ import markdownItFootnote from "markdown-it-footnote";
 import pluginTOC from 'eleventy-plugin-toc';
 import pluginFilters from "./_config/filters.js";
 import { execSync } from "child_process";
+import fs from "node:fs";
+
+const metadata = yaml.load(fs.readFileSync("./_data/metadata.yaml", "utf8")) || {};
+const siteBaseUrl = String(metadata.url || "").trim().replace(/\/+$/, "");
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function(eleventyConfig) {
@@ -140,11 +144,11 @@ eleventyConfig.addFilter("getAuthorObj", (authorsCollection, authorKey) => {
         },
         metadata: {
             language: "en",
-            title: "Blog Title",
-            subtitle: "This is a longer description about your blog.",
-            base: "http://localhost:8080/",
+            title: metadata.title || "Journal New Polis",
+            subtitle: metadata.description || "Journal feed",
+            base: `${siteBaseUrl}/`,
             author: {
-                name: "Your Name"
+                name: metadata?.author?.name || metadata.title || "The New Polis"
             }
         }
     });

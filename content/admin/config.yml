@@ -2,7 +2,7 @@ logo_url: whitestone-logo.png
 
 backend:
   name: git-gateway
-  repo: adamdjbrett/journal-newpolis
+  repo: The-Whitestone-Foundation/journal.thenewpolis.com
   branch: main
 
 

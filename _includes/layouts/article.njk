@@ -68,8 +68,9 @@ layout: layouts/base.njk
             <span class="fst-italic">{{ metadata.subtitle }}</span>, 
             {{ volume }}({{ issue }}), 
             {{ year }}{% if season %}, {{ season }}{% endif %}, 
-            <a href="{{ metadata.url }}{{ pdf }}" target="_blank" rel="noopener noreferrer" class="text-muted text-break text-decoration-none border-bottom">
-                {{ metadata.url }}{{ pdf }}
+            {% set siteUrl = metadata.url | htmlBaseUrl %}
+            <a href="{{ pdf | htmlBaseUrl(siteUrl) }}" target="_blank" rel="noopener noreferrer" class="text-muted text-break text-decoration-none border-bottom">
+                {{ pdf | htmlBaseUrl(siteUrl) }}
             </a>.
         </div>
     </div>

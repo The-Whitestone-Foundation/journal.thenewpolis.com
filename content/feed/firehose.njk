@@ -3,15 +3,16 @@ permalink: /feed/firehose.xml
 eleventyExcludeFromCollections: true
 layout: false
 ---
+{% set siteUrl = metadata.url | htmlBaseUrl %}
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet href="/feed/pretty-atom-feed.xsl" type="text/xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>{{ metadata.title }} Firehose</title>
   <subtitle>{{ metadata.description }}</subtitle>
-  <link href="{{ metadata.url }}/feed/firehose.xml" rel="self"/>
-  <link href="{{ metadata.url }}"/>
+  <link href="{{ '/feed/firehose.xml' | htmlBaseUrl(siteUrl) }}" rel="self"/>
+  <link href="{{ '/' | htmlBaseUrl(siteUrl) }}"/>
   <updated>{{ page.date.toISOString() }}</updated>
-  <id>{{ metadata.url }}/</id>
+  <id>{{ '/' | htmlBaseUrl(siteUrl) }}</id>
   <author>
     <name>{{ metadata.author.name }}</name>
   </author>
@@ -19,9 +20,9 @@ layout: false
     {%- if post.url and post.url != permalink and post.data.title and loop.index0 < 100 %}
     <entry>
       <title>{{ post.data.title }}</title>
-      <link href="{{ metadata.url }}{{ post.url }}"/>
+      <link href="{{ post.url | htmlBaseUrl(siteUrl) }}"/>
       <updated>{{ post.date.toISOString() }}</updated>
-      <id>{{ metadata.url }}{{ post.url }}</id>
+      <id>{{ post.url | htmlBaseUrl(siteUrl) }}</id>
       <content type="html"><![CDATA[
         {{ post.content | safe }}
       ]]></content>
