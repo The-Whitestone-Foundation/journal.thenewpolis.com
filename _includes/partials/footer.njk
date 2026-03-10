@@ -14,7 +14,7 @@
             </span>
             <br/>
             <small>
-                built with <a class="text-white" href="https://11ty.dev" target="_blank">{{ eleventy.generator }}</a> 
+                {{ metadata.footer.built_with.label }} <a class="text-white" href="{{ metadata.footer.built_with.url }}" target="_blank" rel="noopener noreferrer">{{ eleventy.generator }}</a> 
                 | managed by <a class="text-white" href="{{ metadata.footer.manager.url }}" target="_blank" rel="noopener noreferrer">{{ metadata.footer.manager.name }}</a>
             </small>
         </p>

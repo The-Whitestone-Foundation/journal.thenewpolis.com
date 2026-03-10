@@ -77,23 +77,6 @@ collections:
               - { label: "Footer Info", name: "info", widget: "string" }
               - { label: "Copyright Text", name: "text", widget: "string" }
 
-  - name: "editors_list"
-    label: "Editorial Board"
-    files:
-      - file: "_data/editors.yaml"
-        label: "Manage Editors"
-        name: "editors_data"
-        fields:
-          - label: "Editor Members"
-            name: "list"
-            widget: "list"
-            fields:
-              - { label: "Full Name", name: "name", widget: "string" }
-              - { label: "Role/Position", name: "role", widget: "string" }
-              - { label: "Email Address", name: "email", widget: "string" }
-              - { label: "Affiliation/University", name: "affiliation", widget: "string" }
-              - { label: "Profile Image", name: "image", widget: "image" }
-
   - name: "pages"
     label: "Static Pages"
     folder: "content/pages"

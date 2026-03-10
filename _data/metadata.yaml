@@ -37,13 +37,15 @@ navbar:
  - title: Home
    url: /
  - title: About
-   url: https://tnp-dev.netlify.app/
+   url: /about/
  - title: Archives
    url: /archives/
+ - title: Editors
+   url: /editors/  
  - title: Blog
    url: /blog/
  - title: Submissions
-   url: https://tnp-dev.netlify.app/
+   url: /submissions/
 
 footer: 
   year_start: 2018
@@ -62,3 +64,6 @@ footer:
   manager:
     name: "Adam DJ Brett"
     url: "https://adamdjbrett.com"
+  built_with:
+    label: "built with"
+    url: "https://11ty.dev"
