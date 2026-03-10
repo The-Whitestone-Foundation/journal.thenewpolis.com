@@ -1,0 +1,22 @@
+---
+permalink: /feed/feed.json
+---
+{% set baseUrl = metadata.url | htmlBaseUrl %}
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": {{ metadata.title | dump | safe }},
+  "home_page_url": {{ ('/' | htmlBaseUrl(baseUrl)) | dump | safe }},
+  "feed_url": {{ ('/feed/feed.json' | htmlBaseUrl(baseUrl)) | dump | safe }},
+  "description": {{ metadata.description | dump | safe }},
+  "items": [
+  {%- for post in collections.posts | reverse %}
+    {
+      "id": {{ (post.url | htmlBaseUrl(baseUrl)) | dump | safe }},
+      "url": {{ (post.url | htmlBaseUrl(baseUrl)) | dump | safe }},
+      "title": {{ (post.data.title or '') | dump | safe }},
+      "content_html": {{ (post.templateContent or '') | dump | safe }},
+      "date_published": {{ post.date.toISOString() | dump | safe }}
+    }{% if not loop.last %},{% endif %}
+  {%- endfor %}
+  ]
+}

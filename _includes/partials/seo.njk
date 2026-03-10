@@ -1,9 +1,12 @@
+{% set siteUrl = metadata.url | htmlBaseUrl %}
+{% set socialImage = (image or metadata.image) | htmlBaseUrl(siteUrl) %}
 <title>{{title or metadata.title}}</title>
 <meta content="{{title or metadata.title}}" property="og:title" />
 <meta content="{{title or metadata.title}}" property="dc:title" />
 <meta content="{{title or metadata.title}}" name="twitter:title" />
 <meta content="{{title or metadata.title}}" name="title" />
 <meta content="{{title or metadata.title}}" property="og:site_name" />
+<meta content="{{ page.url | htmlBaseUrl(siteUrl) }}" property="og:url" />
 <meta content="{{description or metadata.description}}" name="description" />
 <meta
 	content="{{description or metadata.description}}"
@@ -18,11 +21,13 @@
 	name="twitter:description"
 />
 <meta property="twitter:card" content="summary_large_image" />
-<meta content="{{image or metadata.image}}" name="twitter:image" />
-<meta content="{{image or metadata.image}}" name="facebook:image" />
-<meta content="{{image or metadata.image}}" name="og:image" />
-<link href="{{ metadata.favicon }}" rel="icon" type="image/x-icon" />
-<link rel="apple-touch-icon" href="{{ metadata.favicon }}" />
+<meta content="{{ socialImage }}" name="twitter:image" />
+<meta content="{{ socialImage }}" property="facebook:image" />
+<meta content="{{ socialImage }}" property="og:image" />
+<meta content="{{ socialImage }}" property="og:image:secure_url" />
+<link rel="icon" type="image/png" href="{{ metadata.favicon | htmlBaseUrl(siteUrl) }}" />
+<link rel="shortcut icon" href="{{ metadata.favicon | htmlBaseUrl(siteUrl) }}" />
+<link rel="apple-touch-icon" href="{{ metadata.favicon | htmlBaseUrl(siteUrl) }}" />
 <meta content="{{ metadata.metasocial.facebook }}" property="facebook:author" />
 <meta
 	content="{{ metadata.metasocial.twitteruser }}"
@@ -32,14 +37,17 @@
 <meta content="{{ metadata.metasocial.twitter }}" name="twitter:site" />
 <meta property="og:type" content="website" />
 <meta content="index, follow" name="robots">
-{% set siteUrl = metadata.url | htmlBaseUrl %}
 <link rel="canonical" href="{{ page.url | htmlBaseUrl(siteUrl) }}" />
+<link rel="sitemap" href="{{ '/sitemap.xml' | htmlBaseUrl(siteUrl) }}" type="application/xml" title="{{ metadata.title }} Sitemap" />
 <link
 	rel="alternate"
 	href="{{ '/feed/feed.xml' | htmlBaseUrl(siteUrl) }}"
 	type="application/atom+xml"
 	title="{{ metadata.title }}"
 />
+<link rel="alternate" href="{{ '/feed/feed.rss' | htmlBaseUrl(siteUrl) }}" type="application/rss+xml" title="{{ metadata.title }}" />
+<link rel="alternate" href="{{ '/feed/feed.json' | htmlBaseUrl(siteUrl) }}" type="application/feed+json" title="{{ metadata.title }}" />
+<link rel="alternate" href="{{ '/feed/twtxt.txt' | htmlBaseUrl(siteUrl) }}" type="text/plain" title="{{ metadata.title }}" />
 <meta name="language" content="{{ metadata.language }}" />
 <meta name="locale" content="{{ metadata.locale }}" />
 <meta property="og:locale" content="{{ metadata.locale }}" />

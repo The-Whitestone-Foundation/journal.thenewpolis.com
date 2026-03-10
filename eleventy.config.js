@@ -13,6 +13,16 @@ import pluginFilters from "./_config/filters.js";
 import { execSync } from "child_process";
 import fs from "node:fs";
 
+if (typeof globalThis.File === "undefined") {
+  globalThis.File = class File extends Blob {
+    constructor(parts, name, options = {}) {
+      super(parts, options);
+      this.name = String(name || "");
+      this.lastModified = options.lastModified || Date.now();
+    }
+  };
+}
+
 const metadata = yaml.load(fs.readFileSync("./_data/metadata.yaml", "utf8")) || {};
 const siteBaseUrl = String(metadata.url || "").trim().replace(/\/+$/, "");
 

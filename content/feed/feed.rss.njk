@@ -1,0 +1,22 @@
+---
+permalink: /feed/feed.rss
+---
+{% set baseUrl = metadata.url | htmlBaseUrl %}
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>{{ metadata.title | escape }}</title>
+    <link>{{ '/' | htmlBaseUrl(baseUrl) }}</link>
+    <description>{{ metadata.description | escape }}</description>
+    <atom:link href="{{ '/feed/feed.rss' | htmlBaseUrl(baseUrl) }}" rel="self" type="application/rss+xml" xmlns:atom="http://www.w3.org/2005/Atom" />
+    {% for post in collections.posts | reverse %}
+    <item>
+      <title>{{ (post.data.title or "") | escape }}</title>
+      <link>{{ post.url | htmlBaseUrl(baseUrl) }}</link>
+      <guid>{{ post.url | htmlBaseUrl(baseUrl) }}</guid>
+      <pubDate>{{ post.date.toUTCString() }}</pubDate>
+      <description>{{ (post.data.description or "") | escape }}</description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>
