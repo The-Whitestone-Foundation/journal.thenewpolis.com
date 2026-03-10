@@ -8,6 +8,10 @@ export default function(eleventyConfig) {
 		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "dd LLLL yyyy");
 	});
 
+	eleventyConfig.addFilter("luxonNow", (_value, format, zone) => {
+		return DateTime.now().setZone(zone || "utc").toFormat(format || "yyyy");
+	});
+
 	eleventyConfig.addFilter("htmlDateString", (dateObj) => {
 		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
 		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat('yyyy-LL-dd');

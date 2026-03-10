@@ -35,7 +35,7 @@ hero:
 
 navbar: 
  - title: Home
-   url: https://tnp-dev.netlify.app/
+   url: /
  - title: About
    url: https://tnp-dev.netlify.app/
  - title: Archives
@@ -46,5 +46,19 @@ navbar:
    url: https://tnp-dev.netlify.app/
 
 footer: 
-  info: "A WHITESTONE PUBLICATION"
-  text: "© Copyright The Whitestone Foundation dba The New Polis 2018-2021. All Rights Reserved."
+  year_start: 2018
+  text: "Copyright The Whitestone Foundation dba Whitestone Publications. All Rights Reserved."
+  info: "A WHITESTONE FOUNDATION PUBLICATION"
+  url: "https://thewhitestonefoundation.org/"
+  publications:
+    - title: "JCRT"
+      url: "https://jcrt.org"
+    - title: "The New Polis Journal"
+      url: "https://journal.thenewpolis.com"
+    - title: "The New Polis"
+      url: "https://thenewpolis.com"
+    - title: "Esthesis"
+      url: "https://esthesis.org"
+  manager:
+    name: "Adam DJ Brett"
+    url: "https://adamdjbrett.com"
