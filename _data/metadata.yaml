@@ -7,7 +7,7 @@ locale: "en_US"
 description: "The Whitestone Foundations dba Whitestone Publications is a Colorado-registered 501(c)3 non-profit corporation."
 favicon: /img/thenewpolis-logo.png
 image: /img/thenewpolis-journal-opengraph.webp
-email: hello@domain.com
+email: editor@thenewpolis.com
 
 metasocial: 
   twitter: "https://x.com/user"
