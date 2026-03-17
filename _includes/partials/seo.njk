@@ -33,7 +33,50 @@
 	content="{{ metadata.metasocial.twitteruser }}"
 	property="twitter:author"
 />
-<meta property="dc:creator" content="{{ metadata.author.name }}" />
+<meta property="dc:creator" content="{{ metadata.author.name or metadata.author or metadata.title }}" />
+{% set pageDate = date or page.date %}
+{% set pageTags = tags or [] %}
+{% set pageDesc = description or metadata.description %}
+{% set canonicalUrl = page.url | htmlBaseUrl(siteUrl) %}
+{% set isAcademic = page.url and "/archives/" in page.url and page.url != "/archives/" %}
+{% set dcPublisher = metadata.author.name or metadata.author or metadata.title %}
+{% set pageDateIso = pageDate.toISOString() if pageDate and pageDate.toISOString else pageDate %}
+{# Dublin Core base #}
+<meta property="dc:publisher" content="{{ dcPublisher }}" />
+<meta property="dc:language" content="en" />
+<meta property="dc:format" content="text/html" />
+<meta property="dc:rights" content="Copyright {{ dcPublisher }}. {{ metadata.url }}/copyright/" />
+<meta property="dc:source" content="The New Polis Journal" />
+{# Dublin Core per-page #}
+{% if pageDateIso %}<meta property="dc:date" content="{{ pageDateIso }}" />{% endif %}
+<meta property="dc:type" content="{{ 'article' if (isAcademic or pageTags.length) else 'text' }}" />
+<meta property="dc:identifier" content="{{ canonicalUrl }}" />
+{% if metadata.issn %}<meta property="dc:identifier" content="ISSN:{{ metadata.issn }}" />{% endif %}
+{% if pageDesc %}<meta property="dc:description" content="{{ pageDesc }}" />{% endif %}
+{% for tag in pageTags %}
+	{% if tag != "posts" and tag != "pages" %}
+<meta property="dc:subject" content="{{ tag }}" />
+	{% endif %}
+{% endfor %}
+{% if metadata.metasocial.mastodon %}
+<meta name="fediverse:creator" content="{{ metadata.metasocial.mastodon }}" />
+{% endif %}
+
+{% if isAcademic %}
+	{% set authorKeys = authors | authorsToArray %}
+	{% for authorKey in authorKeys %}
+		{% set authorObj = collections.authors | getAuthorObj(authorKey) %}
+		{% set authorName = authorObj.data.name if authorObj and authorObj.data and authorObj.data.name else authorKey %}
+<meta name="citation_author" content="{{ authorName }}" />
+	{% endfor %}
+<meta name="citation_title" content="{{ title }}" />
+<meta name="citation_journal_title" content="The New Polis Journal" />
+<meta name="citation_publication_date" content="{{ pageDateIso }}" />
+<meta name="citation_fulltext_html_url" content="{{ canonicalUrl }}" />
+	{% if volume %}<meta name="citation_volume" content="{{ volume }}" />{% endif %}
+	{% if issue %}<meta name="citation_issue" content="{{ issue }}" />{% endif %}
+	{% if metadata.issn %}<meta name="citation_issn" content="{{ metadata.issn }}" />{% endif %}
+{% endif %}
 <meta content="{{ metadata.metasocial.twitter }}" name="twitter:site" />
 <meta property="og:type" content="website" />
 <meta content="index, follow" name="robots">
@@ -45,6 +88,7 @@
 	type="application/atom+xml"
 	title="{{ metadata.title }}"
 />
+<link rel="alternate" href="{{ '/feed/firehose.xml' | htmlBaseUrl(siteUrl) }}" type="application/atom+xml" title="{{ metadata.title }} Firehose" />
 <link rel="alternate" href="{{ '/feed/feed.rss' | htmlBaseUrl(siteUrl) }}" type="application/rss+xml" title="{{ metadata.title }}" />
 <link rel="alternate" href="{{ '/feed/feed.json' | htmlBaseUrl(siteUrl) }}" type="application/feed+json" title="{{ metadata.title }}" />
 <link rel="alternate" href="{{ '/feed/twtxt.txt' | htmlBaseUrl(siteUrl) }}" type="text/plain" title="{{ metadata.title }}" />
