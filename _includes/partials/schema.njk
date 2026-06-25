@@ -1,109 +1,100 @@
 {% set siteUrl = metadata.url | htmlBaseUrl %}
 {% set canonicalUrl = page.url | htmlBaseUrl(siteUrl) %}
-{% set isJournalSite = "journal.thenewpolis.com" in siteUrl %}
-{% set isAcademic = (page.url != "/") and isJournalSite %}
-{% set pageSchemaType = "ScholarlyArticle" if isAcademic else "WebPage" %}
-<script type="application/ld+json" data-no-bundle>
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "@id": "https://thewhitestonefoundation.org/#organization",
-    "name": "The Whitestone Foundation",
-    "url": "https://thewhitestonefoundation.org/",
-    "sameAs": [
-      "https://jcrt.org/",
-      "https://www.facebook.com/religioustheory",
-      "https://bsky.app/profile/jcrt.org",
-      "https://www.instagram.com/JCRT_DU1",
-      "https://journal.thenewpolis.com/",
-      "https://thenewpolis.com/",
-      "https://esthesis.org/",
-      "https://www.youtube.com/@whitestonepublications6661"
-    ],
-    "logo": "https://thewhitestonefoundation.org/images/whitestone-logo.png",
-    "image": "https://thewhitestonefoundation.org/images/whitestone-logo.png",
-    "description": "The Whitestone Foundation and its publications advance public-interest scholarship through open-access journals, webinars, and global academic collaboration in culture and religion.",
-    "address": {
-      "@type": "PostalAddress",
-      "postOfficeBoxNumber": "PO Box 396",
-      "addressLocality": "Colbert",
-      "addressRegion": "OK",
-      "postalCode": "74733",
-      "addressCountry": "United States"
-    },
-    "publishes": [
-      { "@type": "CreativeWork", "name": "The Journal of Cultural and Religious Theory", "url": "https://www.jcrt.org/archives/" },
-      { "@type": "CreativeWork", "name": "JCRT Religious Theory Blog", "url": "https://jcrt.org/religioustheory/" },
-      { "@type": "CreativeWork", "name": "The New Polis", "url": "https://thenewpolis.com/" },
-      { "@type": "CreativeWork", "name": "The New Polis Journal", "url": "https://journal.thenewpolis.com/" },
-      { "@type": "CreativeWork", "name": "Esthesis", "url": "https://esthesis.org/" }
-    ],
-    "member": [
-      { "@type": "Person", "name": "Carl Raschke", "url": "https://carlraschke.com/" },
-      { "@type": "Person", "name": "Victor Taylor", "url": "https://www.linkedin.com/in/victor-e-taylor-4911342b/" },
-      { "@type": "Person", "name": "Adam DJ Brett", "url": "https://adamdjbrett.com" }
-    ]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "{{ '/' | htmlBaseUrl(siteUrl) }}#website",
-    "name": "{{ metadata.title }}",
-    "url": "{{ '/' | htmlBaseUrl(siteUrl) }}",
-    "publisher": { "@id": "https://thewhitestonefoundation.org/#organization" },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "{{ '/search/?q={search_term_string}' | htmlBaseUrl(siteUrl) }}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-]
-</script>
-
-{% if page.url %}
+{% set homeUrl = '/' | htmlBaseUrl(siteUrl) %}
+{% set graph = metadata.knowledge_graph %}
+{% set pageImage = (image or metadata.image) | htmlBaseUrl(siteUrl) %}
+{% set authorKey = authors or author %}
+{% set authorObj = collections.authors | getAuthorObj(authorKey) %}
+{% set authorName = authorObj.data.name or authorKey or metadata.title %}
+{% set authorUrl = authorObj.url | htmlBaseUrl(siteUrl) if authorObj and authorObj.url else "" %}
+{% set isArchiveArticle = page and page.inputPath and ("/content/archives/" in page.inputPath) and page.fileSlug not in ["index", "bios"] %}
+{% set isBlogPost = page and page.inputPath and ("/content/blog/" in page.inputPath) %}
+{% set pageType = "ScholarlyArticle" if isArchiveArticle else ("BlogPosting" if isBlogPost else "WebPage") %}
+{% set publishedRaw = date or page.date %}
+{% set modifiedRaw = updated or date or page.date %}
 <script type="application/ld+json" data-no-bundle>
 {
   "@context": "https://schema.org",
-  "@type": "{{ pageSchemaType }}",
-  "headline": "{{ title or metadata.title }}",
-  "description": "{{ description or metadata.description or '' }}",
-  "datePublished": "{% if (date or page.date) and (date or page.date).toISOString %}{{ (date or page.date).toISOString() }}{% else %}{{ date or page.date }}{% endif %}",
-  "dateModified": "{% if (updated or date or page.date) and (updated or date or page.date).toISOString %}{{ (updated or date or page.date).toISOString() }}{% else %}{{ updated or date or page.date }}{% endif %}",
-  "author": {
-    "@type": "Person",
-    "name": "{{ authors or author or metadata.author.name or 'Whitestone Staff' }}"
-  },
-  "publisher": {
-    "@id": "https://thewhitestonefoundation.org/#organization"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ canonicalUrl }}"
-  }
-}
-</script>
-{% endif %}
-
-{% if page.url != "/" %}
-<script type="application/ld+json" data-no-bundle>
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
+  "@graph": [
     {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "{{ '/' | htmlBaseUrl(siteUrl) }}"
+      "@type": ["EducationalOrganization", "Organization"],
+      "@id": {{ graph.organization_id | dump | safe }},
+      "name": "The Whitestone Foundation",
+      "alternateName": "Whitestone Publications",
+      "legalName": "The Whitestone Foundation",
+      "url": "https://thewhitestonefoundation.org/",
+      "logo": "https://thewhitestonefoundation.org/images/whitestone-logo.png",
+      "image": "https://thewhitestonefoundation.org/images/whitestone-logo.png",
+      "description": "The Whitestone Foundation dba Whitestone Publications advances public-interest scholarship through open-access publications, programs, and global academic collaboration.",
+      "sameAs": {{ graph.same_as | dump | safe }},
+      "publishes": { "@id": {{ graph.publications_id | dump | safe }} },
+      "member": [
+        { "@type": "Person", "name": "Carl Raschke", "url": "https://carlraschke.com/" },
+        { "@type": "Person", "name": "Victor Taylor", "url": "https://www.linkedin.com/in/victor-e-taylor-4911342b/" },
+        { "@type": "Person", "name": "Adam DJ Brett", "url": "https://adamdjbrett.com" }
+      ]
     },
     {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "{{ title or 'Article' }}",
-      "item": "{{ canonicalUrl }}"
-    }
+      "@type": "ItemList",
+      "@id": {{ graph.publications_id | dump | safe }},
+      "name": "Whitestone Publications",
+      "itemListElement": [
+        { "@type": "CreativeWork", "position": 1, "name": "The Journal for Cultural and Religious Theory", "url": "https://jcrt.org/" },
+        { "@type": "Periodical", "position": 2, "name": "The New Polis Journal", "url": "https://journal.thenewpolis.com/" },
+        { "@type": "Blog", "position": 3, "name": "The New Polis", "url": "https://thenewpolis.com/" },
+        { "@type": "Blog", "position": 4, "name": "ESTHESIS", "url": "https://esthesis.org/" }
+      ]
+    },
+    {
+      "@type": ["WebSite", "Periodical"],
+      "@id": {{ graph.website_id | dump | safe }},
+      "name": {{ metadata.title | dump | safe }},
+      "description": {{ (metadata.subtitle or metadata.description) | dump | safe }},
+      "url": {{ homeUrl | dump | safe }},
+      "publisher": { "@id": {{ graph.publisher_id | dump | safe }} },
+      "inLanguage": {{ (metadata.language or "en") | dump | safe }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ ("/search/?q={search_term_string}" | htmlBaseUrl(siteUrl)) | dump | safe }},
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": {{ pageType | dump | safe }},
+      "@id": {{ (canonicalUrl ~ "#webpage") | dump | safe }},
+      "url": {{ canonicalUrl | dump | safe }},
+      "name": {{ (title or metadata.title) | dump | safe }},
+      "headline": {{ (title or metadata.title) | dump | safe }},
+      "description": {{ (description or metadata.description or "") | dump | safe }},
+      "image": {{ pageImage | dump | safe }},
+      "datePublished": {{ (publishedRaw.toISOString() if publishedRaw and publishedRaw.toISOString else publishedRaw) | dump | safe }},
+      "dateModified": {{ (modifiedRaw.toISOString() if modifiedRaw and modifiedRaw.toISOString else modifiedRaw) | dump | safe }},
+      "inLanguage": {{ (metadata.language or "en") | dump | safe }},
+      "isPartOf": { "@id": {{ graph.website_id | dump | safe }} },
+      "publisher": { "@id": {{ graph.publisher_id | dump | safe }} },
+      "author": {
+        "@type": "Person",
+        "name": {{ authorName | dump | safe }}{% if authorUrl %},
+        "@id": {{ (authorUrl ~ "#person") | dump | safe }},
+        "url": {{ authorUrl | dump | safe }}{% endif %}
+      },
+      "mainEntityOfPage": { "@id": {{ canonicalUrl | dump | safe }} }{% if volume %},
+      "volumeNumber": {{ volume | dump | safe }}{% endif %}{% if issue %},
+      "issueNumber": {{ issue | dump | safe }}{% endif %}{% if pdf %},
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "application/pdf",
+        "contentUrl": {{ (pdf | htmlBaseUrl(siteUrl)) | dump | safe }}
+      }{% endif %}
+    }{% if page.url and page.url != "/" %},
+    {
+      "@type": "BreadcrumbList",
+      "@id": {{ (canonicalUrl ~ "#breadcrumb") | dump | safe }},
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": {{ homeUrl | dump | safe }} },
+        { "@type": "ListItem", "position": 2, "name": {{ (title or metadata.title) | dump | safe }}, "item": {{ canonicalUrl | dump | safe }} }
+      ]
+    }{% endif %}
   ]
 }
 </script>
-{% endif %}

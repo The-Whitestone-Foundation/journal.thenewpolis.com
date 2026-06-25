@@ -4,7 +4,8 @@
   "description": "A blog starter using 11ty and Develope by Adam Dj Brett.",
   "type": "module",
   "scripts": {
-    "build": "npx @11ty/eleventy",
+    "sequoia:stage": "node scripts/build-sequoia-content.mjs",
+    "build": "npm run sequoia:stage && rm -rf _site && npx @11ty/eleventy",
     "build-nocolor": "cross-env NODE_DISABLE_COLORS=1 npx @11ty/eleventy",
     "build-ghpages": "npx @11ty/eleventy --pathprefix=/journal-newpolis/",
     "start": "npx @11ty/eleventy --serve --quiet",

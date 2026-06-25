@@ -40,6 +40,7 @@
 {% set canonicalUrl = page.url | htmlBaseUrl(siteUrl) %}
 {% set isAcademic = page.url and "/archives/" in page.url and page.url != "/archives/" %}
 {% set dcPublisher = metadata.author.name or metadata.author or metadata.title %}
+{% set dcPublisher = metadata.publisher or "Whitestone Publications" %}
 {% set pageDateIso = pageDate.toISOString() if pageDate and pageDate.toISOString else pageDate %}
 {# Dublin Core base #}
 <meta property="dc:publisher" content="{{ dcPublisher }}" />
@@ -61,6 +62,18 @@
 {% if metadata.metasocial.mastodon %}
 <meta name="fediverse:creator" content="{{ metadata.metasocial.mastodon }}" />
 {% endif %}
+{% set standardSiteEnabled = metadata.standard_site and metadata.standard_site.enabled %}
+{% set standardSitePublicationAtUri = metadata.standard_site.publication_at_uri if standardSiteEnabled else "" %}
+{% set standardSiteDocumentAtUri = "" %}
+{% if standardSiteEnabled and standardSiteRecords and page and page.url %}
+  {% set standardSiteDocumentAtUri = standardSiteRecords[page.url] %}
+{% endif %}
+{% if standardSiteDocumentAtUri %}
+<link rel="site.standard.document" href="{{ standardSiteDocumentAtUri }}" />
+{% endif %}
+{% if standardSitePublicationAtUri %}
+<link rel="site.standard.publication" href="{{ standardSitePublicationAtUri }}" />
+{% endif %}
 
 {% if isAcademic %}
 	{% set authorKeys = authors | authorsToArray %}
@@ -76,6 +89,14 @@
 	{% if volume %}<meta name="citation_volume" content="{{ volume }}" />{% endif %}
 	{% if issue %}<meta name="citation_issue" content="{{ issue }}" />{% endif %}
 	{% if metadata.issn %}<meta name="citation_issn" content="{{ metadata.issn }}" />{% endif %}
+{% elif pageDate and page.url and page.url != "/" %}
+<meta property="zotero:itemType" content="blogPost" />
+<meta name="prism.genre" content="blogentry" />
+<meta name="prism.publicationName" content="{{ metadata.title }}" />
+<meta name="citation_author" content="{{ author or authors or metadata.title }}" />
+<meta name="citation_publication_date" content="{{ pageDateIso }}" />
+<meta name="citation_public_url" content="{{ canonicalUrl }}" />
+<meta name="citation_language" content="{{ metadata.language or 'en' }}" />
 {% endif %}
 <meta content="{{ metadata.metasocial.twitter }}" name="twitter:site" />
 <meta property="og:type" content="website" />
@@ -92,6 +113,10 @@
 <link rel="alternate" href="{{ '/feed/feed.rss' | htmlBaseUrl(siteUrl) }}" type="application/rss+xml" title="{{ metadata.title }}" />
 <link rel="alternate" href="{{ '/feed/feed.json' | htmlBaseUrl(siteUrl) }}" type="application/feed+json" title="{{ metadata.title }}" />
 <link rel="alternate" href="{{ '/feed/twtxt.txt' | htmlBaseUrl(siteUrl) }}" type="text/plain" title="{{ metadata.title }}" />
+<link rel="alternate" href="{{ '/feed/philpapers.xml' | htmlBaseUrl(siteUrl) }}" type="application/rss+xml" title="{{ metadata.title }} PhilPapers RSS" />
+<link rel="alternate" href="{{ '/sitemaps/datacite.xml' | htmlBaseUrl(siteUrl) }}" type="application/xml" title="{{ metadata.title }} DataCite XML" />
+<link rel="alternate" href="{{ '/sitemaps/oai_dc.xml' | htmlBaseUrl(siteUrl) }}" type="application/xml" title="{{ metadata.title }} OAI-DC XML" />
+<link rel="alternate" href="{{ '/sitemaps/doaj-archives.xml' | htmlBaseUrl(siteUrl) }}" type="application/xml" title="{{ metadata.title }} DOAJ Archives XML" />
 <meta name="language" content="{{ metadata.language }}" />
 <meta name="locale" content="{{ metadata.locale }}" />
 <meta property="og:locale" content="{{ metadata.locale }}" />
