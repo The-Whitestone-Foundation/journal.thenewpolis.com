@@ -76,6 +76,9 @@
 {% endif %}
 
 {% if isAcademic %}
+<link rel="cite-as" href="{{ canonicalUrl }}" />
+<link rel="type" href="https://schema.org/ScholarlyArticle" />
+<link rel="describedby" type="application/ld+json" profile="https://schema.org/" href="{{ page.url }}metadata.json" />
 	{% set authorKeys = authors | authorsToArray %}
 	{% for authorKey in authorKeys %}
 		{% set authorObj = collections.authors | getAuthorObj(authorKey) %}
@@ -90,9 +93,15 @@
 	{% if issue %}<meta name="citation_issue" content="{{ issue }}" />{% endif %}
 	{% if metadata.issn %}<meta name="citation_issn" content="{{ metadata.issn }}" />{% endif %}
 {% elif pageDate and page.url and page.url != "/" %}
+{% if page.inputPath and "/blog/" in page.inputPath %}
+<link rel="cite-as" href="{{ canonicalUrl }}" />
+<link rel="type" href="https://schema.org/BlogPosting" />
+<link rel="describedby" type="application/ld+json" profile="https://schema.org/" href="{{ page.url }}metadata.json" />
+{% endif %}
 <meta property="zotero:itemType" content="blogPost" />
 <meta name="prism.genre" content="blogentry" />
 <meta name="prism.publicationName" content="{{ metadata.title }}" />
+<meta name="citation_title" content="{{ title or metadata.title }}" />
 <meta name="citation_author" content="{{ author or authors or metadata.title }}" />
 <meta name="citation_publication_date" content="{{ pageDateIso }}" />
 <meta name="citation_public_url" content="{{ canonicalUrl }}" />

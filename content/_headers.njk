@@ -1,0 +1,15 @@
+---
+permalink: /_headers
+layout: null
+eleventyExcludeFromCollections: true
+---
+{% set siteUrl = metadata.url | htmlBaseUrl %}
+{% for entry in collections.fairEntries %}
+{% set schemaType = "ScholarlyArticle" if entry.url.startsWith('/archives/') else "BlogPosting" %}
+{{ entry.url }}
+  Link: <{{ entry.url | htmlBaseUrl(siteUrl) }}metadata.json>; rel="describedby"; type="application/ld+json"; profile="https://schema.org/"
+  Link: <{{ entry.url | htmlBaseUrl(siteUrl) }}>; rel="cite-as"
+  Link: <https://schema.org/{{ schemaType }}>; rel="type"
+{{ entry.url }}metadata.json
+  Content-Type: application/ld+json
+{% endfor %}

@@ -1,0 +1,34 @@
+---
+pagination:
+  data: collections.fairEntries
+  size: 1
+  alias: entryPost
+permalink: "{{ entryPost.url }}metadata.json"
+layout: null
+eleventyExcludeFromCollections: true
+---
+{% set entryData = entryPost.data %}
+{% set siteUrl = metadata.url | htmlBaseUrl %}
+{% set entry_jsonld_type = "ScholarlyArticle" if entryPost.url.startsWith('/archives/') else "BlogPosting" %}
+{% set entry_jsonld_title = entryData.title or metadata.title %}
+{% set entry_jsonld_description = entryData.description or entryData.abstract or metadata.description %}
+{% set entry_jsonld_abstract = entryData.abstract or entryData.description or metadata.description %}
+{% set entry_jsonld_url = entryData.canonical_url or (entryPost.url | htmlBaseUrl(siteUrl)) %}
+{% set entry_jsonld_identifier = entryData.doi or entryData.canonical_url %}
+{% set entry_jsonld_date_published = (entryData.date or entryPost.date) | htmlDateString %}
+{% set entry_jsonld_date_modified = (entryData.updated or entryData.date or entryPost.date) | htmlDateString %}
+{% set entry_jsonld_image = (entryData.image or metadata.image) | htmlBaseUrl(siteUrl) %}
+{% set rawAuthors = entryData.authors or entryData.author %}
+{% set authorKeys = rawAuthors | authorsToArray %}
+{% set entry_jsonld_authors = [] %}
+{% if authorKeys and authorKeys.length %}
+{% for authorKey in authorKeys %}
+  {% set authorObj = collections.authors | getAuthorObj(authorKey) %}
+  {% set authorName = authorObj.data.name if authorObj and authorObj.data and authorObj.data.name else authorKey %}
+  {% set entry_jsonld_authors = (entry_jsonld_authors.push({ "@type": "Person", "name": authorName }), entry_jsonld_authors) %}
+{% endfor %}
+{% else %}
+{% set entry_jsonld_authors = [{ "@type": "Organization", "name": metadata.title }] %}
+{% endif %}
+{% set entry_jsonld_citations = entryData.citations %}
+{% include "partials/entry-jsonld.njk" %}
