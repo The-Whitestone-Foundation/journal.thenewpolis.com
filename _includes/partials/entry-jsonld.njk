@@ -1,0 +1,42 @@
+{
+  "@context": "https://schema.org",
+  "@type": {{ entry_jsonld_type | dump | safe }},
+  "@id": {{ (entry_jsonld_url ~ "#article") | dump | safe }},
+  "name": {{ entry_jsonld_title | dump | safe }},
+  "headline": {{ entry_jsonld_title | dump | safe }},
+  "description": {{ entry_jsonld_description | dump | safe }},
+  {% if entry_jsonld_type == "ScholarlyArticle" %}
+  "abstract": {{ entry_jsonld_abstract | dump | safe }},
+  {% endif %}
+  "url": {{ entry_jsonld_url | dump | safe }},
+  "inLanguage": {{ (metadata.language or "en") | dump | safe }},
+  "datePublished": {{ entry_jsonld_date_published | dump | safe }},
+  "dateModified": {{ entry_jsonld_date_modified | dump | safe }},
+  "image": {{ entry_jsonld_image | dump | safe }},
+  "author": {{ entry_jsonld_authors | dump | safe }},
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ (metadata.publisher or "Whitestone Publications") | dump | safe }},
+    "url": {{ metadata.url | dump | safe }}
+  },
+  {% if entry_jsonld_type == "ScholarlyArticle" %}
+  "isPartOf": {
+    "@type": "Periodical",
+    "name": "The New Polis Journal",
+    "url": {{ metadata.url | dump | safe }}{% if metadata.issn %},
+    "issn": {{ metadata.issn | dump | safe }}{% endif %}
+  },
+  {% else %}
+  "isPartOf": {
+    "@type": "Blog",
+    "name": {{ metadata.title | dump | safe }},
+    "url": {{ (metadata.url ~ "/blog/") | dump | safe }}
+  },
+  {% endif %}
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ entry_jsonld_url | dump | safe }}
+  }{% if entry_jsonld_identifier %},
+  "identifier": {{ entry_jsonld_identifier | dump | safe }}{% endif %}{% if entry_jsonld_citations and entry_jsonld_citations.length %},
+  "citation": {{ entry_jsonld_citations | dump | safe }}{% endif %}
+}

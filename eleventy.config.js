@@ -189,6 +189,18 @@ eleventyConfig.addFilter("getAuthorObj", (authorsCollection, authorKey) => {
         return collectionApi.getFilteredByGlob("content/archives/**/index.md");
     });
 
+    eleventyConfig.addCollection("archiveArticles", function(collectionApi) {
+        return collectionApi.getFilteredByGlob("content/archives/**/*.md")
+            .filter(item => !String(item.inputPath || "").endsWith("/index.md"));
+    });
+
+    eleventyConfig.addCollection("fairEntries", function(collectionApi) {
+        const archiveArticles = collectionApi.getFilteredByGlob("content/archives/**/*.md")
+            .filter(item => !String(item.inputPath || "").endsWith("/index.md"));
+        const blogPosts = collectionApi.getFilteredByGlob("content/blog/**/*.md");
+        return [...archiveArticles, ...blogPosts].filter(item => item.url);
+    });
+
     // IdAttributePlugin (dibiarkan jika Anda menggunakannya di tempat lain)
     eleventyConfig.addPlugin(IdAttributePlugin, {});
 
