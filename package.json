@@ -30,7 +30,7 @@
     "npm": ">=11.14.0"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy": "4.0.0-alpha.10",
     "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-navigation": "^1.0.5",
     "@11ty/eleventy-plugin-rss": "^3.0.0",
@@ -58,5 +58,8 @@
   "packageManager": "npm@11.14.0",
   "overrides": {
     "undici": "~7.28.0"
+  },
+  "allowScripts": {
+    "sharp@0.33.5": true
   }
 }

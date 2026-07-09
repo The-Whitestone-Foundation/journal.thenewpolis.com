@@ -209,15 +209,24 @@
 }
         /* 2. STICKY NAVBAR */
         
-        .navbar {
+.navbar {
     background: #000;
     border-bottom: 1px solid #333;
     z-index: 1020;
     padding: 0.5rem 0;
 }
 
+.navbar-nav {
+    align-items: center;
+    justify-content: center;
+}
+
 .nav-link {
+    align-items: center;
+    display: flex;
     font-family: 'Crete Round', serif;
+    gap: 0.35rem;
+    justify-content: center;
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 1px;
