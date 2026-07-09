@@ -178,21 +178,6 @@ body, html {
 .text-white, a.text-white {color: white !important;}
 .bg-white {background-color: #e2e7ec color:#555;}
 
-#search .pagefind-ui__result {
-    background-color: #ffe0b2 !important; 
-    color: #333333 !important; 
-    border: 1px solid #ffcc80;
-    margin-bottom: 5px;
-}
-
-#search .pagefind-ui__result-excerpt {
-    color: #555555 !important;
-}
-
-#search .pagefind-ui__result-link {
-    color: #5d310b !important; 
-}
-
 .jt {
     margin-bottom: -35px;
 }
