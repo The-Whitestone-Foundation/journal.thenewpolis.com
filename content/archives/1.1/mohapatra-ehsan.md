@@ -1,6 +1,6 @@
 ---
 nanoid: "HG3Tu9"
-doi: ""
+doi: "10.17613/86kjv-zbx89"
 id: 7
 title: "Reconstructing Diversal Ontologies: Unlearning as a Methodology of Decolonial Living"
 description: "Magna Mohapatra and Zunayed Ahmed Ehsan propose unlearning as a decolonial practice for unsettling Eurocentric knowledge and reconnecting thought, economic life, and local ways of knowing in the Global South."

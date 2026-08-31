@@ -1,6 +1,6 @@
 ---
 nanoid: "fUNKPa"
-doi: ""
+doi: "10.17613/9v4c9-awn47"
 id: 4
 title: "The Heretic and the Iconoclast: Sylvia Wynter's Engagement with Derrida"
 description: "Brendan John Brown places Sylvia Wynter's account of the human in conversation with Jacques Derrida's deconstruction, arguing that Wynter's heretical thought opens agency beyond inherited Western metaphysical hierarchies."

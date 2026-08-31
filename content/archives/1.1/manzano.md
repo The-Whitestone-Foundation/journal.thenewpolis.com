@@ -1,6 +1,6 @@
 ---
 nanoid: "z5AAuU"
-doi: ""
+doi: "10.17613/h01rn-a3p72"
 id: 6
 title: "The Ngigua Community Jagüey: A Sanctuary of Indigenous Resistance Today"
 description: "María Cristina Manzano-Munguía and Guillermo López Varela examine the Ngigua jagüey in Puebla as a communal defense of water, food security, and Indigenous life against extractivism, colonial domination, and the unequal effects of COVID-19."

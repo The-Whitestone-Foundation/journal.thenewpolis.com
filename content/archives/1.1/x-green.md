@@ -1,6 +1,6 @@
 ---
 nanoid: "N66o8E"
-doi: ""
+doi: "10.17613/b2dbs-mw124"
 id: 11
 title: "Undoing the Legacy of the Doctrine of Christian Domination ('Discovery')"
 description: "Roger Green traces the Doctrine of Christian Discovery through United States and international law and argues that overturning its legal foundations is necessary for Indigenous sovereignty, land return, and decolonization."
