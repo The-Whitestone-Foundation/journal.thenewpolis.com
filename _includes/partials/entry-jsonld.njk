@@ -19,7 +19,7 @@
     "name": {{ (metadata.publisher or "Whitestone Publications") | dump | safe }},
     "url": {{ metadata.url | dump | safe }}
   },
-  {% if entry_jsonld_type == "ScholarlyArticle" %}
+  {% if entry_is_archive %}
   "isPartOf": {
     "@type": "Periodical",
     "name": "The New Polis Journal",
@@ -37,6 +37,13 @@
     "@type": "WebPage",
     "@id": {{ entry_jsonld_url | dump | safe }}
   }{% if entry_jsonld_identifier %},
-  "identifier": {{ entry_jsonld_identifier | dump | safe }}{% endif %}{% if entry_jsonld_citations and entry_jsonld_citations.length %},
+  "identifier": {{ entry_jsonld_identifier | dump | safe }}{% endif %}{% if entryData.doi %},
+  "sameAs": {{ ("https://doi.org/" ~ entryData.doi) | dump | safe }}{% endif %}{% if entryData.volume %},
+  "volumeNumber": {{ entryData.volume | dump | safe }}{% endif %}{% if entryData.issue %},
+  "issueNumber": {{ entryData.issue | dump | safe }}{% endif %}{% if entryData.pages %},
+  "pagination": {{ entryData.pages | dump | safe }}{% endif %}{% if entryData.keywords and entryData.keywords.length %},
+  "keywords": {{ entryData.keywords | dump | safe }}{% endif %}{% if entry_jsonld_subjects and entry_jsonld_subjects.length %},
+  "about": {{ entry_jsonld_subjects | dump | safe }}{% endif %}{% if entryData.pdf %},
+  "encoding": {"@type":"MediaObject","encodingFormat":"application/pdf","contentUrl":{{ (entryData.pdf | htmlBaseUrl(siteUrl)) | dump | safe }}}{% endif %}{% if entry_jsonld_citations and entry_jsonld_citations.length %},
   "citation": {{ entry_jsonld_citations | dump | safe }}{% endif %}
 }

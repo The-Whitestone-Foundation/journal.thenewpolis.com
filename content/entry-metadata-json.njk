@@ -9,7 +9,8 @@ eleventyExcludeFromCollections: true
 ---
 {% set entryData = entryPost.data %}
 {% set siteUrl = metadata.url | htmlBaseUrl %}
-{% set entry_jsonld_type = ("CreativeWork" if entryData.resource_type == "textDocument-other" else "ScholarlyArticle") if entryPost.url.startsWith('/archives/') else "BlogPosting" %}
+{% set entry_is_archive = entryPost.url.startsWith('/archives/') %}
+{% set entry_jsonld_type = ("CreativeWork" if entryData.resource_type == "textDocument-other" else "ScholarlyArticle") if entry_is_archive else "BlogPosting" %}
 {% set entry_jsonld_title = entryData.title or metadata.title %}
 {% set entry_jsonld_description = entryData.description or entryData.abstract or metadata.description %}
 {% set entry_jsonld_abstract = entryData.abstract or entryData.description or metadata.description %}
@@ -25,10 +26,15 @@ eleventyExcludeFromCollections: true
 {% for authorKey in authorKeys %}
   {% set authorObj = collections.authors | getAuthorObj(authorKey) %}
   {% set authorName = authorObj.data.name if authorObj and authorObj.data and authorObj.data.name else authorKey %}
-  {% set entry_jsonld_authors = (entry_jsonld_authors.push({ "@type": "Person", "name": authorName }), entry_jsonld_authors) %}
+  {% set authorType = "Organization" if authorName == "The New Polis Journal Editors" else "Person" %}
+  {% set entry_jsonld_authors = (entry_jsonld_authors.push({ "@type": authorType, "name": authorName }), entry_jsonld_authors) %}
 {% endfor %}
 {% else %}
 {% set entry_jsonld_authors = [{ "@type": "Organization", "name": metadata.title }] %}
 {% endif %}
 {% set entry_jsonld_citations = entryData.citations %}
+{% set entry_jsonld_subjects = [] %}
+{% for subject in entryData.subjects or [] %}
+  {% set entry_jsonld_subjects = (entry_jsonld_subjects.push({ "@type": "Thing", "name": subject.label, "sameAs": subject.uri }), entry_jsonld_subjects) %}
+{% endfor %}
 {% include "partials/entry-jsonld.njk" %}

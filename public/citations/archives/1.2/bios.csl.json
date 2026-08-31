@@ -11,6 +11,7 @@
     "abstract": "Biographical notes for the contributors to The New Polis Journal, volume 1, issue 2.",
     "container-title": "The New Polis Journal",
     "container-title-short": "TNPJ",
+    "journalAbbreviation": "TNPJ",
     "ISSN": "2771-9782",
     "volume": "1",
     "issue": "2",
@@ -24,6 +25,7 @@
     },
     "publisher": "Whitestone Publications",
     "URL": "https://journal.thenewpolis.com/archives/1.2/bios/",
+    "DOI": "10.17613/2wqty-gt384",
     "keyword": "contributors, author-biographies, volume-1-issue-2"
   }
 ]

@@ -67,6 +67,7 @@ function csl(data, issue, slug, people) {
 		abstract: data.description,
 		"container-title": JOURNAL,
 		"container-title-short": ABBREVIATION,
+		journalAbbreviation: ABBREVIATION,
 		ISSN,
 		volume: String(data.volume),
 		issue: String(data.issue),

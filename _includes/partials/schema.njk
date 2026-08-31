@@ -3,15 +3,22 @@
 {% set homeUrl = '/' | htmlBaseUrl(siteUrl) %}
 {% set graph = metadata.knowledge_graph %}
 {% set pageImage = (image or metadata.image) | htmlBaseUrl(siteUrl) %}
-{% set authorKey = authors or author %}
-{% set authorObj = collections.authors | getAuthorObj(authorKey) %}
-{% set authorName = authorObj.data.name or authorKey or metadata.title %}
-{% set authorUrl = authorObj.url | htmlBaseUrl(siteUrl) if authorObj and authorObj.url else "" %}
-{% set isArchiveArticle = page and page.inputPath and ("/content/archives/" in page.inputPath) and page.fileSlug not in ["index", "bios"] %}
+{% set isArchiveEntry = page and page.inputPath and ("/content/archives/" in page.inputPath) and page.fileSlug != "index" %}
+{% set isArchiveArticle = isArchiveEntry and resource_type != "textDocument-other" %}
 {% set isBlogPost = page and page.inputPath and ("/content/blog/" in page.inputPath) %}
-{% set pageType = "ScholarlyArticle" if isArchiveArticle else ("BlogPosting" if isBlogPost else "WebPage") %}
-{% set publishedRaw = date or page.date %}
+{% set pageType = "ScholarlyArticle" if isArchiveArticle else ("CreativeWork" if isArchiveEntry else ("BlogPosting" if isBlogPost else "WebPage")) %}
+{% set publishedRaw = date or year or page.date %}
 {% set modifiedRaw = updated or date or page.date %}
+{% set pageAuthors = [] %}
+{% for authorKey in (authors or author) | authorsToArray %}
+  {% set authorObj = collections.authors | getAuthorObj(authorKey) %}
+  {% set authorName = authorObj.data.name if authorObj and authorObj.data else authorKey %}
+  {% set authorType = "Organization" if authorName == "The New Polis Journal Editors" else "Person" %}
+  {% set pageAuthors = (pageAuthors.push({ "@type": authorType, "name": authorName }), pageAuthors) %}
+{% endfor %}
+{% if not pageAuthors.length %}{% set pageAuthors = [{ "@type": "Organization", "name": metadata.title }] %}{% endif %}
+{% set pageSubjects = [] %}
+{% for subject in subjects or [] %}{% set pageSubjects = (pageSubjects.push({ "@type": "Thing", "name": subject.label, "sameAs": subject.uri }), pageSubjects) %}{% endfor %}
 <script type="application/ld+json" data-no-bundle>
 {
   "@context": "https://schema.org",
@@ -52,6 +59,7 @@
       "description": {{ (metadata.subtitle or metadata.description) | dump | safe }},
       "url": {{ homeUrl | dump | safe }},
       "publisher": { "@id": {{ graph.publisher_id | dump | safe }} },
+      "issn": {{ metadata.issn | dump | safe }},
       "inLanguage": {{ (metadata.language or "en") | dump | safe }},
       "potentialAction": {
         "@type": "SearchAction",
@@ -72,15 +80,15 @@
       "inLanguage": {{ (metadata.language or "en") | dump | safe }},
       "isPartOf": { "@id": {{ graph.website_id | dump | safe }} },
       "publisher": { "@id": {{ graph.publisher_id | dump | safe }} },
-      "author": {
-        "@type": "Person",
-        "name": {{ authorName | dump | safe }}{% if authorUrl %},
-        "@id": {{ (authorUrl ~ "#person") | dump | safe }},
-        "url": {{ authorUrl | dump | safe }}{% endif %}
-      },
+      "author": {{ pageAuthors | dump | safe }},
       "mainEntityOfPage": { "@id": {{ canonicalUrl | dump | safe }} }{% if volume %},
       "volumeNumber": {{ volume | dump | safe }}{% endif %}{% if issue %},
-      "issueNumber": {{ issue | dump | safe }}{% endif %}{% if pdf %},
+      "issueNumber": {{ issue | dump | safe }}{% endif %}{% if pages %},
+      "pagination": {{ pages | dump | safe }}{% endif %}{% if doi %},
+      "identifier": {{ doi | dump | safe }},
+      "sameAs": {{ ("https://doi.org/" ~ doi) | dump | safe }}{% endif %}{% if keywords and keywords.length %},
+      "keywords": {{ keywords | dump | safe }}{% endif %}{% if pageSubjects and pageSubjects.length %},
+      "about": {{ pageSubjects | dump | safe }}{% endif %}{% if pdf %},
       "encoding": {
         "@type": "MediaObject",
         "encodingFormat": "application/pdf",

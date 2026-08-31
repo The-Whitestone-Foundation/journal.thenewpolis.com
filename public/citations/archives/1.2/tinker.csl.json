@@ -12,6 +12,7 @@
     "abstract": "Tink Tinker traces the history of a book once bound in the skin of a murdered Lenape man, showing how Christian institutions and settler narratives converted colonial violence into a celebrated symbol of white supremacy.",
     "container-title": "The New Polis Journal",
     "container-title-short": "TNPJ",
+    "journalAbbreviation": "TNPJ",
     "ISSN": "2771-9782",
     "volume": "1",
     "issue": "2",
@@ -25,6 +26,7 @@
     },
     "publisher": "Whitestone Publications",
     "URL": "https://journal.thenewpolis.com/archives/1.2/tinker/",
+    "DOI": "10.17613/emh9s-a2d56",
     "keyword": "rezin-monroe-barns, lenape, white-supremacy, christian-colonialism, iliff-school-of-theology"
   }
 ]

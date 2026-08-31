@@ -1,6 +1,6 @@
 ---
 nanoid: "Gup6DW"
-doi: ""
+doi: "10.17613/v3fvw-gwd78"
 id: 5
 title: "Marx's Misfired Mission"
 description: "Carl Raschke returns to Marx's early critique of Hegel to argue that Marxism neglected a more durable account of sovereignty as community in favor of supposedly scientific laws of economic and historical development."
