@@ -1,3 +1,8 @@
-/pagefind/*
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+/citations/*.ris
+  Content-Type: application/x-research-info-systems; charset=utf-8
+
+/citations/*.csl.json
+  Content-Type: application/vnd.citationstyles.csl+json; charset=utf-8
+
+/archives/*/metadata.json
+  Content-Type: application/json; charset=utf-8
