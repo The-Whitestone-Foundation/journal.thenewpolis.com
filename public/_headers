@@ -6,3 +6,7 @@
 
 /archives/*/metadata.json
   Content-Type: application/json; charset=utf-8
+
+/pagefind/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
