@@ -34,11 +34,12 @@
 	property="twitter:author"
 />
 <meta property="dc:creator" content="{{ metadata.author.name or metadata.author or metadata.title }}" />
-{% set pageDate = date or page.date %}
+{% set pageDate = date or year or page.date %}
 {% set pageTags = tags or [] %}
 {% set pageDesc = description or metadata.description %}
 {% set canonicalUrl = page.url | htmlBaseUrl(siteUrl) %}
-{% set isAcademic = page.url and "/archives/" in page.url and page.url != "/archives/" %}
+{% set isArchiveEntry = page.inputPath and "/content/archives/" in page.inputPath and page.fileSlug != "index" %}
+{% set isAcademic = isArchiveEntry and resource_type != "textDocument-other" %}
 {% set dcPublisher = metadata.author.name or metadata.author or metadata.title %}
 {% set dcPublisher = metadata.publisher or "Whitestone Publications" %}
 {% set pageDateIso = pageDate.toISOString() if pageDate and pageDate.toISOString else pageDate %}
@@ -46,7 +47,7 @@
 <meta property="dc:publisher" content="{{ dcPublisher }}" />
 <meta property="dc:language" content="en" />
 <meta property="dc:format" content="text/html" />
-<meta property="dc:rights" content="Copyright {{ dcPublisher }}. {{ metadata.url }}/copyright/" />
+<meta property="dc:rights" content="Copyright held by the author(s). {{ metadata.url }}/copyright/" />
 <meta property="dc:source" content="The New Polis Journal" />
 {# Dublin Core per-page #}
 {% if pageDateIso %}<meta property="dc:date" content="{{ pageDateIso }}" />{% endif %}
@@ -59,6 +60,23 @@
 <meta property="dc:subject" content="{{ tag }}" />
 	{% endif %}
 {% endfor %}
+{% for keyword in keywords or [] %}<meta property="dc:subject" content="{{ keyword }}" />{% endfor %}
+{% for subject in subjects or [] %}<meta property="dc:subject" content="{{ subject.label }}" />{% endfor %}
+{% if isArchiveEntry %}
+	{% set authorKeys = authors | authorsToArray %}
+	{% for authorKey in authorKeys %}
+		{% set authorObj = collections.authors | getAuthorObj(authorKey) %}
+<meta property="dc:creator" content="{{ authorObj.data.name if authorObj and authorObj.data and authorObj.data.name else authorKey }}" />
+	{% endfor %}
+<meta name="prism.publicationName" content="The New Polis Journal" />
+<meta name="prism.issn" content="{{ metadata.issn }}" />
+<meta name="prism.volume" content="{{ volume }}" />
+<meta name="prism.number" content="{{ issue }}" />
+<meta name="prism.publicationDate" content="{{ pageDateIso }}" />
+<meta name="prism.url" content="{{ canonicalUrl }}" />
+	{% if pages %}{% set prismPages = pages | split('-') %}<meta name="prism.startingPage" content="{{ prismPages[0] }}" /><meta name="prism.endingPage" content="{{ prismPages[1] }}" />{% endif %}
+	{% if doi %}<meta name="prism.doi" content="{{ doi }}" />{% endif %}
+{% endif %}
 {% if metadata.metasocial.mastodon %}
 <meta name="fediverse:creator" content="{{ metadata.metasocial.mastodon }}" />
 {% endif %}
@@ -80,7 +98,6 @@
 <link rel="type" href="https://schema.org/ScholarlyArticle" />
 <link rel="describedby" type="application/ld+json" profile="https://schema.org/" href="{{ page.url }}metadata.json" />
 <meta property="zotero:itemType" content="journalArticle" />
-	{% set authorKeys = authors | authorsToArray %}
 	{% for authorKey in authorKeys %}
 		{% set authorObj = collections.authors | getAuthorObj(authorKey) %}
 		{% set authorName = authorObj.data.name if authorObj and authorObj.data and authorObj.data.name else authorKey %}
@@ -88,11 +105,37 @@
 	{% endfor %}
 <meta name="citation_title" content="{{ title }}" />
 <meta name="citation_journal_title" content="The New Polis Journal" />
+<meta name="citation_journal_abbrev" content="TNPJ" />
 <meta name="citation_publication_date" content="{{ pageDateIso }}" />
 <meta name="citation_fulltext_html_url" content="{{ canonicalUrl }}" />
+	{% if pdf %}<meta name="citation_pdf_url" content="{{ pdf | htmlBaseUrl(siteUrl) }}" />{% endif %}
+	{% if doi %}<meta name="citation_doi" content="{{ doi }}" />{% endif %}
 	{% if volume %}<meta name="citation_volume" content="{{ volume }}" />{% endif %}
 	{% if issue %}<meta name="citation_issue" content="{{ issue }}" />{% endif %}
+	{% if pages %}{% set pageParts = pages | split('-') %}<meta name="citation_firstpage" content="{{ pageParts[0] }}" /><meta name="citation_lastpage" content="{{ pageParts[1] }}" />{% endif %}
 	{% if metadata.issn %}<meta name="citation_issn" content="{{ metadata.issn }}" />{% endif %}
+    {% if ris %}<link rel="alternate" type="application/x-research-info-systems" href="{{ ris }}" />{% endif %}
+    {% if csl_json %}<link rel="alternate" type="application/vnd.citationstyles.csl+json" href="{{ csl_json }}" />{% endif %}
+{% elif isArchiveEntry %}
+<link rel="cite-as" href="{{ canonicalUrl }}" />
+<link rel="type" href="https://schema.org/CreativeWork" />
+<meta property="zotero:itemType" content="document" />
+	{% for authorKey in authorKeys %}
+		{% set authorObj = collections.authors | getAuthorObj(authorKey) %}
+<meta name="citation_author" content="{{ authorObj.data.name if authorObj and authorObj.data and authorObj.data.name else authorKey }}" />
+	{% endfor %}
+<meta name="citation_title" content="{{ title }}" />
+<meta name="citation_journal_title" content="The New Polis Journal" />
+<meta name="citation_journal_abbrev" content="TNPJ" />
+<meta name="citation_publication_date" content="{{ pageDateIso }}" />
+	{% if pdf %}<meta name="citation_pdf_url" content="{{ pdf | htmlBaseUrl(siteUrl) }}" />{% endif %}
+	{% if doi %}<meta name="citation_doi" content="{{ doi }}" />{% endif %}
+	{% if volume %}<meta name="citation_volume" content="{{ volume }}" />{% endif %}
+	{% if issue %}<meta name="citation_issue" content="{{ issue }}" />{% endif %}
+	{% if pages %}{% set pageParts = pages | split('-') %}<meta name="citation_firstpage" content="{{ pageParts[0] }}" /><meta name="citation_lastpage" content="{{ pageParts[1] }}" />{% endif %}
+	{% if metadata.issn %}<meta name="citation_issn" content="{{ metadata.issn }}" />{% endif %}
+	{% if ris %}<link rel="alternate" type="application/x-research-info-systems" href="{{ ris }}" />{% endif %}
+	{% if csl_json %}<link rel="alternate" type="application/vnd.citationstyles.csl+json" href="{{ csl_json }}" />{% endif %}
 {% elif pageDate and page.url and page.url != "/" %}
 {% if page.inputPath and "/blog/" in page.inputPath %}
 <link rel="cite-as" href="{{ canonicalUrl }}" />

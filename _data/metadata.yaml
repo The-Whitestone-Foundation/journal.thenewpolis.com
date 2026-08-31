@@ -9,6 +9,9 @@ favicon: /img/thenewpolis-logo.png
 image: /img/thenewpolis-journal-opengraph.webp
 email: editor@thenewpolis.com
 publisher: "Whitestone Publications"
+issn: "2771-9782"
+journal_abbreviation: "TNPJ"
+rights_url: "https://journal.thenewpolis.com/copyright/"
 standard_site:
   enabled: true
   did: "did:plc:e24okfpxr7ctcbmruijop5gp"

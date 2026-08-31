@@ -13,7 +13,8 @@
     "debug": "cross-env DEBUG=Eleventy* npx @11ty/eleventy",
     "debugstart": "cross-env DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
     "benchmark": "cross-env DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
-    "citations": "bash ./scripts/generate-citations.sh"
+    "citations": "node scripts/generate-citations.mjs",
+    "prebuild": "npm run citations"
   },
   "repository": {
     "type": "git",

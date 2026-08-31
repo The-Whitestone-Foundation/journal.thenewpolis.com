@@ -34,6 +34,8 @@ export default function(eleventyConfig) {
 		return Math.min.apply(null, numbers);
 	});
 
+	eleventyConfig.addFilter("split", (value, separator) => String(value || "").split(separator));
+
 	// Return the keys used in an object
 	eleventyConfig.addFilter("getKeys", target => {
 		return Object.keys(target);

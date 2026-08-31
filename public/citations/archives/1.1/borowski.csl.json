@@ -1,0 +1,30 @@
+[
+  {
+    "id": "Czt4VK",
+    "type": "article-journal",
+    "title": "Knowing with the City: Subverting Cognitive Empires through Speculative Fiction",
+    "author": [
+      {
+        "given": "Mateusz",
+        "family": "Borowski"
+      }
+    ],
+    "abstract": "Mateusz Borowski reads speculative-fiction cities as models of dominant social orders and as sites where alternative forms of citizenship can challenge technocratic and colonial ways of knowing.",
+    "container-title": "The New Polis Journal",
+    "container-title-short": "TNPJ",
+    "ISSN": "2771-9782",
+    "volume": "1",
+    "issue": "1",
+    "page": "1-18",
+    "issued": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "publisher": "Whitestone Publications",
+    "URL": "https://journal.thenewpolis.com/archives/1.1/borowski/",
+    "keyword": "speculative-fiction, cities, urban-futures, citizenship, cognitive-empires"
+  }
+]

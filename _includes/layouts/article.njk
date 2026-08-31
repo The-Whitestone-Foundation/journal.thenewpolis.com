@@ -33,11 +33,17 @@ layout: layouts/base.njk
             <a href="{{ pdf }}" class="btn btn-sm btn-dark rounded-0 px-3" target="_blank" rel="noopener noreferrer">
                 <i class="bi bi-file-pdf"></i> Download PDF
             </a>
-            {% if citation_file %}
-            <a href="{{ citation_file }}" class="btn btn-sm btn-outline-dark rounded-0" download>
+            {% if ris %}
+            <a href="{{ ris }}" class="btn btn-sm btn-outline-dark rounded-0" download>
                 <i class="bi bi-quote"></i> Download Citation (RIS)
             </a>
             {% endif %}
+            {% if csl_json %}
+            <a href="{{ csl_json }}" class="btn btn-sm btn-outline-dark rounded-0" download>
+                <i class="bi bi-braces"></i> Download Citation (CSL JSON)
+            </a>
+            {% endif %}
+            {% if doi %}<a href="https://doi.org/{{ doi }}" class="btn btn-sm btn-outline-dark rounded-0">DOI</a>{% endif %}
         </div>
         {% endif %}
     </header>
@@ -51,11 +57,14 @@ layout: layouts/base.njk
         <div class="col p-3">
             <h3 class="serif fw-bold">Citation Information</h3>
         </div>
-        {% if citation_file %}
+        {% if ris or csl_json %}
         <div class="col-auto">
-            <a href="{{ citation_file }}" class="btn btn-light me-3 btn-sm rounded-0 fw-bold text-uppercase" download style="font-size: 0.75rem; letter-spacing: 0.5px;">
+            {% if ris %}<a href="{{ ris }}" class="btn btn-light me-2 btn-sm rounded-0 fw-bold text-uppercase" download style="font-size: 0.75rem; letter-spacing: 0.5px;">
                 <i class="bi bi-download me-1"></i> Download RIS
-            </a>
+            </a>{% endif %}
+            {% if csl_json %}<a href="{{ csl_json }}" class="btn btn-light me-3 btn-sm rounded-0 fw-bold text-uppercase" download style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                <i class="bi bi-download me-1"></i> Download CSL JSON
+            </a>{% endif %}
         </div>
         {% endif %}
     </div>
@@ -67,7 +76,8 @@ layout: layouts/base.njk
             <span class="fst-italic">{{ metadata.title }}</span>, 
             <span class="fst-italic">{{ metadata.subtitle }}</span>, 
             {{ volume }}({{ issue }}), 
-            {{ year }}{% if season %}, {{ season }}{% endif %}, 
+            {{ year }}{% if season %}, {{ season }}{% endif %}{% if pages %}, pp. {{ pages }}{% endif %}{% if doi %},
+            <a href="https://doi.org/{{ doi }}">https://doi.org/{{ doi }}</a>{% endif %},
             {% set siteUrl = metadata.url | htmlBaseUrl %}
             <a href="{{ pdf | htmlBaseUrl(siteUrl) }}" target="_blank" rel="noopener noreferrer" class="text-muted text-break text-decoration-none border-bottom">
                 {{ pdf | htmlBaseUrl(siteUrl) }}

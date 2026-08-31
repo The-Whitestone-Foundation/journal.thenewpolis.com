@@ -1,14 +1,33 @@
 ---
-id: 03
-title: |
-    KNOWING WITH THE CITY: SUBVERTING COGNITIVE EMPIRES THROUGH SPECULATIVE FICTION
-description: "No wonder that various forms of speculative fiction and the rise of the city as the main living space for world populations have been so tightly connected, because both are the great inventions of the modern era. From Shangri-La in James Hilton's Lost Horizon (1933) to the Cradle in Neal Stephenson's Seveneves (2015), from the eponymous city in Fritz Lang's Metropolis (1927) to Los Angeles in Ridley Scott's Blade Runner (1982) fictional urban landscapes materialize the promises and threats of the technocratic imperialism developing from the late 16th century onwards. As Anke Steinborn and Denis Newiak argue in the introduction to the volume Urbane Zukünfte im Science Fiction Film (2020), utopian and dystopian cities of the future depicted in science fiction films fulfil a more important function than just a spectacular backdrop for entertaining action."
+nanoid: "Czt4VK"
+doi: ""
+id: 3
+title: "Knowing with the City: Subverting Cognitive Empires through Speculative Fiction"
+description: "Mateusz Borowski reads speculative-fiction cities as models of dominant social orders and as sites where alternative forms of citizenship can challenge technocratic and colonial ways of knowing."
 volume: 1
 issue: 1
+pages: 1-18
 season: Winter
 year: 2022
 authors: mateusz-borowski
-pdf:  /archives/1.1/Borowski.pdf
-citation_file: /citations/borowski.ris
+pdf: /archives/1.1/Borowski.pdf
+ris: /citations/archives/1.1/borowski.ris
+csl_json: /citations/archives/1.1/borowski.csl.json
+keywords:
+  - speculative-fiction
+  - cities
+  - urban-futures
+  - citizenship
+  - cognitive-empires
+subjects:
+  - label: "Science fiction"
+    scheme: "FAST"
+    identifier: "fst01108566"
+    uri: "https://id.worldcat.org/fast/1108566"
+    category: "topical"
+  - label: "Urban ecology (Sociology)"
+    scheme: "FAST"
+    identifier: "fst01733718"
+    uri: "https://id.worldcat.org/fast/1733718"
+    category: "topical"
 ---
-
