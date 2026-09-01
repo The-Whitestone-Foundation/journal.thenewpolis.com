@@ -59,7 +59,6 @@
       "description": {{ (metadata.subtitle or metadata.description) | dump | safe }},
       "url": {{ homeUrl | dump | safe }},
       "publisher": { "@id": {{ graph.publisher_id | dump | safe }} },
-      "issn": {{ metadata.issn | dump | safe }},
       "inLanguage": {{ (metadata.language or "en") | dump | safe }},
       "potentialAction": {
         "@type": "SearchAction",

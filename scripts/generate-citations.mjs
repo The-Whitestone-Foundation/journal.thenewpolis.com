@@ -10,7 +10,6 @@ const OUTPUT = path.join(ROOT, "public", "citations", "archives");
 const SITE = "https://journal.thenewpolis.com";
 const JOURNAL = "The New Polis Journal";
 const ABBREVIATION = "TNPJ";
-const ISSN = "2771-9782";
 
 function frontMatter(file) {
 	const match = fs.readFileSync(file, "utf8").match(/^---\s*\n([\s\S]*?)\n---/);
@@ -47,7 +46,7 @@ function ris(data, issue, slug, people) {
 	const [start, end] = pageParts(data.pages);
 	const lines = [data.resource_type === "textDocument-other" ? "TY  - GEN" : "TY  - JOUR", `TI  - ${data.title}`];
 	for (const name of people) lines.push(`AU  - ${name}`);
-	lines.push(`AB  - ${data.description}`, `JF  - ${JOURNAL}`, `JO  - ${ABBREVIATION}`, `SN  - ${ISSN}`, `VL  - ${data.volume}`, `IS  - ${data.issue}`);
+	lines.push(`AB  - ${data.description}`, `JF  - ${JOURNAL}`, `JO  - ${ABBREVIATION}`, `VL  - ${data.volume}`, `IS  - ${data.issue}`);
 	if (start) lines.push(`SP  - ${start}`);
 	if (end) lines.push(`EP  - ${end}`);
 	lines.push(`PY  - ${data.year}`);
@@ -68,7 +67,6 @@ function csl(data, issue, slug, people) {
 		"container-title": JOURNAL,
 		"container-title-short": ABBREVIATION,
 		journalAbbreviation: ABBREVIATION,
-		ISSN,
 		volume: String(data.volume),
 		issue: String(data.issue),
 		page: String(data.pages),
