@@ -1,6 +1,6 @@
 ---
 nanoid: "GkTBwc"
-doi: "10.17613/9ce9b-36504"
+doi: "10.17613/d3f6s-5tt21"
 id: 3
 title: "Decolonizing Identity Politics through Subjective In-Betweenness"
 description: "Rode Molla analyzes how religious, ethnic, and political identities became instruments of colonial and neoliberal power in Ethiopia and proposes subjective in-betweenness as a practice for recovering agency and shared political life."

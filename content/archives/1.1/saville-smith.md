@@ -1,6 +1,6 @@
 ---
 nanoid: "R2vH4d"
-doi: "10.17613/7eyga-d5y94"
+doi: "10.17613/byqnn-d7d30"
 id: 8
 title: "Is Scotland a Colony? The Western Cognitive Empire and the Rhetoric of Colonialism"
 description: "Richard Saville-Smith tests the language of colonialism against Scotland's political history and independence movement, distinguishing territorial civic nationalism from ethnic nationalism while questioning British cognitive authority."

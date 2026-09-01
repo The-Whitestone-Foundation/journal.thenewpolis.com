@@ -1,6 +1,6 @@
 ---
 nanoid: "MdcudC"
-doi: "10.17613/9ng29-zd643"
+doi: "10.17613/f5t6z-k7e65"
 id: 10
 title: "What Do We Mean by 'Decoloniality'?"
 description: "Walter Mignolo, Catherine Walsh, Tink Tinker, and Fernando Gómez Herrero discuss decoloniality as a set of concepts, practices, and lived struggles against colonial systems of knowledge, power, and territory."

@@ -1,6 +1,6 @@
 ---
 nanoid: "hSR6au"
-doi: "10.17613/dqvww-ghq74"
+doi: "10.17613/3ymvs-kkh48"
 id: 1
 title: "Wild Globalization and 'Wild Value'"
 description: "Gary Bedford, Carl Raschke, and Joshua Ramos discuss value from Marx through contemporary globalization, examining how capital, technology, knowledge, and ecological limits reshape economic life."

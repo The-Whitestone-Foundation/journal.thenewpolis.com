@@ -1,6 +1,6 @@
 ---
 nanoid: "ojgcpK"
-doi: "10.17613/2wqty-gt384"
+doi: "10.17613/1khpy-gz216"
 id: 7
 resource_type: textDocument-other
 title: "Author Bios"

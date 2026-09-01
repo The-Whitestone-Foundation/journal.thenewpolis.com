@@ -1,6 +1,6 @@
 ---
 nanoid: "3Epxkz"
-doi: "10.17613/fbaft-6k327"
+doi: "10.17613/nn662-38q44"
 id: 2
 title: "A 'Difficult Discussion': Christian Evangelicalism and Critical Race Theory"
 description: "Soong-Chan Rah, Jason Alvis, Carl Raschke, Scott Coley, and John Zivojinovic examine evangelical responses to critical race theory, competing accounts of racism, and the challenges of sustained public theological dialogue."

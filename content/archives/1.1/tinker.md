@@ -1,6 +1,6 @@
 ---
 nanoid: "coSe3v"
-doi: "10.17613/chter-wm054"
+doi: "10.17613/0x3zh-cy541"
 id: 9
 title: "The Colonial Compromise: A Panel Discussion"
 description: "Tink Tinker, Ward Churchill, Miguel De La Torre, Natsu Taylor Saito, and Roger Green discuss how settler colonialism, Christian domination, race, law, and territorial sovereignty continue to structure Indigenous dispossession."

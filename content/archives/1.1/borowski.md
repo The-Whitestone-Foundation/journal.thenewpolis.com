@@ -1,6 +1,6 @@
 ---
 nanoid: "Czt4VK"
-doi: "10.17613/g6441-2jf75"
+doi: "10.17613/r12a8-kk130"
 id: 3
 title: "Knowing with the City: Subverting Cognitive Empires through Speculative Fiction"
 description: "Mateusz Borowski reads speculative-fiction cities as models of dominant social orders and as sites where alternative forms of citizenship can challenge technocratic and colonial ways of knowing."

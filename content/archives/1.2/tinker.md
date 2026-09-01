@@ -1,6 +1,6 @@
 ---
 nanoid: "nqLDpJ"
-doi: "10.17613/emh9s-a2d56"
+doi: "10.17613/8y3ya-8ag53"
 id: 6
 title: "Rev. Rezin Monroe Barns' Gift to Iliff: A Tainted Trophy and the Framing of White Supremacy in America"
 description: "Tink Tinker traces the history of a book once bound in the skin of a murdered Lenape man, showing how Christian institutions and settler narratives converted colonial violence into a celebrated symbol of white supremacy."
