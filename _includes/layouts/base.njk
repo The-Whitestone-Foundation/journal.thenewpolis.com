@@ -7,18 +7,15 @@
 </head>
 <body>
   {% include "partials/header.njk" %}
-  <heading-anchors>
-    <main class="h-entry">
-      {{ content | safe }}
-    </main>
-  </heading-anchors>
+  <main class="h-entry">
+    {{ content | safe }}
+  </main>
   <p class="h-card visually-hidden mb-0">
     <a class="p-name u-url" href="https://thewhitestonefoundation.org/">Whitestone Publications</a>
     <span class="p-org">The Whitestone Foundation</span>
   </p>
 {% include "partials/footer.njk" %}
 <script src="/js/bs.js"></script>
-  <script type="module" src="/js/heading-anchors.js"></script>
   {% if page.url != '/search/' %}<script type="module" src="/pagefind/pagefind-component-ui.js"></script>{% endif %}
 </body>
 </html>

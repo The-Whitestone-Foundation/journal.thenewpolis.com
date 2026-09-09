@@ -2,7 +2,6 @@ import { IdAttributePlugin, InputPathToUrlTransformPlugin, HtmlBasePlugin } from
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
-// import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import yaml from "js-yaml";
 import markdownIt from "markdown-it";
 import markdownItAnchor from "markdown-it-anchor";
@@ -10,7 +9,6 @@ import markdownItAttrs from 'markdown-it-attrs';
 import markdownItFootnote from "markdown-it-footnote";
 import pluginTOC from 'eleventy-plugin-toc';
 import pluginFilters from "./_config/filters.js";
-import { execSync } from "child_process";
 import fs from "node:fs";
 
 if (typeof globalThis.File === "undefined") {
@@ -105,11 +103,6 @@ export default async function(eleventyConfig) {
     eleventyConfig.addPlugin(HtmlBasePlugin);
     eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
 	eleventyConfig.addWatchTarget("public/img/**/*");
-    eleventyConfig.on("eleventy.after", () => {
-        execSync(`npx pagefind --site _site --glob \"**/*.html\"`, {
-            encoding: "utf-8",
-        });
-    });
 eleventyConfig.addFilter("getAuthorObj", (authorsCollection, authorKey) => {
         if (!authorKey || !authorsCollection) return null;
         return authorsCollection.find(author => {
@@ -162,21 +155,6 @@ eleventyConfig.addFilter("getAuthorObj", (authorsCollection, authorKey) => {
             }
         }
     });
-
-    // Image optimization
- //  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
- //      formats: ["avif", "webp", "auto"],
- //      failOnError: false,
- //      htmlOptions: {
- //          imgAttributes: {
- //              loading: "lazy",
- //              decoding: "async",
- //          }
- //      },
- //      sharpOptions: {
- //          animated: true,
- //      },
- //  });
 
     // Filters
     eleventyConfig.addPlugin(pluginFilters);
