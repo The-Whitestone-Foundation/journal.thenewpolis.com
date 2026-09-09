@@ -44,6 +44,7 @@ export default async function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("**/*.pdf");
     eleventyConfig.addPassthroughCopy({ "./public/citations/": "/citations/" });
     eleventyConfig.addPassthroughCopy({ "content/img": "img" });
+    eleventyConfig.addPassthroughCopy({ "node_modules/@zachleat/heading-anchors/heading-anchors.js": "js/heading-anchors.js" });
     eleventyConfig.addPassthroughCopy("content/admin");
 
     // Watch files

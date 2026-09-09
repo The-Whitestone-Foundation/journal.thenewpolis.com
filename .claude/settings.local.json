@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sI https://jcrt.org/pagefind/pagefind-ui.js)",
+      "Bash(curl -sI https://jcrt.org/pagefind/pagefind.js)",
+      "Bash(curl -s https://jcrt.org/pagefind/pagefind-entry.json)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{size_download}\\\\n\" https://jcrt.org/pagefind/pagefind-ui.css)",
+      "Bash(curl -s -o /dev/null -w \"meta: %{http_code} %{size_download}\\\\n\" https://jcrt.org/pagefind/pagefind.en_8f9816958e.pf_meta)",
+      "Bash(curl -s -o /dev/null -w \"wasm: %{http_code} %{size_download}\\\\n\" https://jcrt.org/pagefind/wasm.en.pagefind)",
+      "Bash(curl -s -o /dev/null -w \"unknown-wasm: %{http_code} %{size_download}\\\\n\" https://jcrt.org/pagefind/wasm.unknown.pagefind)",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "mcp__claude-in-chrome__navigate",
+      "mcp__claude-in-chrome__computer",
+      "mcp__claude-in-chrome__browser_batch",
+      "Bash(ln -sfn /Users/abrett76/github/journal.thenewpolis.com/node_modules node_modules)",
+      "Bash(npx @11ty/eleventy)",
+      "Bash(git check-ignore *)",
+      "Bash(rm node_modules)"
+    ]
+  }
+}
