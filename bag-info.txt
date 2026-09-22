@@ -1,0 +1,8 @@
+Source-Organization: The Whitestone Foundation
+Contact-Name: Adam DJ Brett
+Contact-Email: adam@adamdjbrett.com
+External-Description: Source for The New Polis Journal, an open-access journal published by The Whitestone Foundation. Eleventy site with article pages, PDFs, DOIs and citation exports.
+External-Identifier: https://github.com/The-Whitestone-Foundation/journal.thenewpolis.com
+External-Identifier: https://journal.thenewpolis.com/
+Bag-Group-Identifier: The Whitestone Foundation
+Bag-Count: 1 of 1
