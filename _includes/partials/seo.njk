@@ -38,7 +38,8 @@
 {% set pageTags = tags or [] %}
 {% set pageDesc = description or metadata.description %}
 {% set canonicalUrl = page.url | htmlBaseUrl(siteUrl) %}
-{% set isArchiveEntry = page.inputPath and "/content/archives/" in page.inputPath and page.fileSlug != "index" %}
+{# fileSlug of archives/1.1/index.md is "1.1", so test the path stem, not the slug #}
+{% set isArchiveEntry = page.inputPath and "/content/archives/" in page.inputPath and not page.filePathStem.endsWith("/index") %}
 {% set isAcademic = isArchiveEntry and resource_type != "textDocument-other" %}
 {% set dcPublisher = metadata.author.name or metadata.author or metadata.title %}
 {% set dcPublisher = metadata.publisher or "Whitestone Publications" %}
